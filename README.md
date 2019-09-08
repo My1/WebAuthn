@@ -1,14 +1,34 @@
-[![Licensed under the MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/lbuchs/WebAuthn/blob/master/LICENSE)
-[![Requires PHP 5.6](https://img.shields.io/badge/PHP-%3E%3D%205.6-green.svg)](https://php.net)
-[![Last Commit](https://img.shields.io/github/last-commit/lbuchs/WebAuthn.svg)](https://github.com/lbuchs/WebAuthn/commits/master)
+[![Licensed under the MIT License](https://img.shields.io/badge/License-MIT-0af.svg?style=plastic)](https://github.com/My1/WebAuthn/blob/master/LICENSE)
+
+[![Requires PHP 5.6](https://img.shields.io/badge/PHP-%E2%89%A5%205.6-fa0.svg?style=plastic)](https://php.net) Should probably work, don't expect anything
+
+[![but Support only for supported PHP Versions](https://img.shields.io/badge/PHP-%E2%89%A5%207.1-4f4.svg?style=plastic)](https://www.php.net/supported-versions.php) I can only really help if you have a more or less modern PHP Version
+
+[![Last Commit](https://img.shields.io/github/last-commit/My1/WebAuthn.svg?style=plastic)](https://github.com/lbuchs/WebAuthn/commits/master)
 
 # WebAuthn
 *A simple PHP WebAuthn (FIDO2) server library*
 
 Goal of this project is to provide a small, lightweight, understandable library to protect logins with security keys like Yubico or Solo or fingerprint on Android.
 
+## Fork
+
+This is Forked from https://github.com/lbuchs/Webauthn to provide some extra features for the library, his example, and another example with A LOT Less JS, especially no outside JS, which, as the original dev nicely pointed out, is entirely not needed.
+
+It is very simple to create a button that opens Webauthn, but does basically nothing except preparing to send the response over an HTML Form which can be very useful in slow or throttled internet where on AJAX style sites the user gets no feedback and just nothing works.
+
+Extra Features include:
+
+1) "discouraged" User Verification (try not to ask for a PIN) by setting the UV Value to `-1`
+2) Second Example with Database Backend and Multi-User Support (and to illustrate RK Sign in better)
+3) UV Dropdown in default Example between the 3 options
+4) fix in the default example to properly handle no registrations
+5) Update Signature counter in the default example (obviously also happens in second example)
+6) Automatic selection of the right domain in examples
+7) changed default options in default example to allow no attestation and ignore attestation certificate for easier tryout.
+
 ## Manual
-See /_test for a simple usage of this library. Check [webauthn.lubu.ch](https://webauthn.lubu.ch) for a working example.
+See /_test for a simple usage of this library. Check [my1.dev/wa](https://my1.dev/wa) for a working example.
 
 ### Supported attestation statement formats
 * android-key &#x2705;
@@ -20,7 +40,7 @@ See /_test for a simple usage of this library. Check [webauthn.lubu.ch](https://
 
 This library supports only authenticators which are signed with a X.509 certificate (except for `none` format). ECDAA and self attestation is not supported.
 
-## Workflow
+## Original Example Workflow
 
              JAVASCRIPT            |          SERVER
     ------------------------------------------------------------
@@ -85,7 +105,7 @@ When calling `WebAuthn\WebAuthn->getGetArgs`, don't provide any `$credentialIds`
 * [dev.yubico](https://developers.yubico.com/FIDO2/)
 * [FIDO Alliance](https://fidoalliance.org)
 
-## FIDO2 Hardware
+## U2F/FIDO2 Hardware
 * [Yubico](https://www.yubico.com/products/yubikey-hardware/compare-yubikeys/)
 * [Solo](https://solokeys.com) Open Source!
 * [Feitan](https://www.ftsafe.com/Products/FIDO2)
